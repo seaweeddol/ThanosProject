@@ -1,12 +1,10 @@
 var names = [];
 var audio = new Audio('sounds/Finger-snap.mp3');
 
-init();
+// initialize board
+reset();
 
-function init(){
-  reset();
-}
-
+// create tiles from names in array
 function createTiles(){
   for(var i = 0; i < names.length; i++){
     $(".tileContainer").append("<span class='tile'>" + names[i] + "</span>");
@@ -25,7 +23,7 @@ function thanosed(){
   createTiles();
 }
 
-//clear tiles
+// clear all tiles
 function clearTiles(){
   names.forEach(function(name){
     $(".tile").fadeOut(500,function(){
@@ -34,11 +32,12 @@ function clearTiles(){
   });
 }
 
+// empty array
 function clearArray(){
   names = [];
 }
 
-// clear board, and reset to original tiles
+// clear board, reset to original tiles, and recreate board
 function reset(){
   clearTiles();
   clearArray();
@@ -46,6 +45,7 @@ function reset(){
   createTiles(names.name);
 }
 
+// create new tile based on user input
 function addTile(){
   var newTile = $('#userInput').val();
   names.push(newTile);
@@ -53,7 +53,7 @@ function addTile(){
   $(".tileContainer").append("<span class='tile'>" + newTile + "</span>");
 }
 
-// when user enters text and presses enter or button, add new tile
+// adds new tile after user presses enter or clicks + button
 $('document').ready(function(){
     $('#addButton').click(function(){
         addTile();
@@ -65,7 +65,7 @@ $('document').ready(function(){
     });
 });
 
-//when clear button is clicked, clear tiles
+// when clear button is clicked, clear tiles
 clearButton.addEventListener("click", function(){
   clearTiles();
   clearArray();
@@ -76,6 +76,7 @@ resetButton.addEventListener("click", function(){
   reset();
 });
 
+// when thanos button is clicked, run thanosed function and play finger snap sound
 thanosButton.addEventListener("click", function(){
   thanosed();
   audio.play();
