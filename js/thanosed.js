@@ -18,6 +18,7 @@ function thanosed(){
     if (randomNum < 50) {
       names.splice(this, 1);
     }
+    console.log(randomNum);
   });
   clearTiles();
   createTiles();
