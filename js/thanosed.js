@@ -1,50 +1,57 @@
 var names = [];
+var survivors = [];
 var audio = new Audio('sounds/Finger-snap.mp3');
 
 // initialize board
-reset();
+init();
+
+function init(){
+  names = ["Iron Man", "Vision", "Captain America", "Thor", "Black Widow", "Pepper Pots", "War Machine", "Heimdall", "Loki", "The Hulk", "Bucky Barnes", "Falcon", "Hawkeye", "Drax", "Black Panther", "Rocket Raccoon", "Dr. Strange", "Groot", "Nebula", "Spiderman", "Scarlet Witch", "Starlord", "Ant-Man", "Gamora", "Okoye", "Mantis", "The Wasp"];
+  createTiles(names.name);
+}
 
 // create tiles from names in array
 function createTiles(){
-  for(var i = 0; i < names.length; i++){
-    $(".tileContainer").append("<span class='tile'>" + names[i] + "</span>");
-  }
+  names.forEach(function(name){
+    $(".tileContainer").fadeIn(500, function(){
+      $(".tileContainer").append("<span class='tile'>" + name + "</span>");
+    });
+  });
 }
 
 // remove approximately half of the tiles
 function thanosed(){
   names.forEach(function(name){
     var randomNum = Math.floor((Math.random() * 100) + 1);
-    if (randomNum < 50) {
-      names.splice(this, 1);
+    if (randomNum > 50) {
+      survivors.push(name);
     }
-    console.log(randomNum);
+    console.log(name + " " + randomNum);
   });
+  names = survivors;
+  survivors = [];
   clearTiles();
   createTiles();
 }
 
 // clear all tiles
 function clearTiles(){
-  names.forEach(function(name){
-    $(".tile").fadeOut(500,function(){
-        $(this).remove();
-      });
+  $('.tileContainer').fadeOut(500, function() {
+     $(this).empty().show();
   });
-}
+};
 
 // empty array
 function clearArray(){
   names = [];
-}
+};
 
 // clear board, reset to original tiles, and recreate board
 function reset(){
   clearTiles();
   clearArray();
-  names = ["Iron Man", "Vision", "Captain America", "Thor", "Black Widow", "Pepper Pots", "War Machine", "Heimdall", "Loki", "The Hulk", "Bucky Barnes", "Falcon", "Hawkeye", "Drax", "Black Panther", "Rocket Raccoon", "Dr. Strange", "Groot", "Nebula", "Spiderman", "Scarlet Witch", "Starlord", "Ant-Man", "Gamora", "Okoye", "Mantis", "The Wasp"];
-  createTiles(names.name);
-}
+  init();
+};
 
 // create new tile based on user input
 function addTile(){
