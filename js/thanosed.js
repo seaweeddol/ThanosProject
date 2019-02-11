@@ -1,3 +1,4 @@
+// variable names
 var names = [];
 var survivors = [];
 var audio = new Audio('sounds/Finger-snap.mp3');
