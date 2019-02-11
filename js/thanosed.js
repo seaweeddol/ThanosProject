@@ -103,6 +103,3 @@ thanosButton.addEventListener("click", function(){
   thanosed();
   audio.play();
 });
-
-// this is another comment on the git-basics branch
-// subtract branch 
